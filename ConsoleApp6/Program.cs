@@ -22,6 +22,7 @@ namespace ConsoleApp6
         {
             Random rnd = new Random();
             Cat cat = (Cat)sender;
+
             if (cat.HungryStatus < 20 && rnd.Next(0, 10) < 5)
                 cat.Feed();
             else
