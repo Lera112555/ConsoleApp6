@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using static ConsoleApp6.cat;
 
@@ -7,18 +8,27 @@ namespace ConsoleApp6
 {
     class CatSmartHouse
     {
-        List<Cat> cats = new List<Cat>();
+
+        
+            List<Cat> cats = new List<Cat>();
         public CatSmartHouse(int foodResourse)
         {
             FoodResourse = foodResourse;
         }
-        public int FoodResourse
-        { get; set; }
+        public int FoodResourse { get; set; }
 
         public void AddCat(Cat cat)
         {
             cats.Add(cat);
             cat.HungryStatusChanged += Cat_HungryStatusChanged;
+        }
+
+        public int CatsCount
+        {
+            get
+            {
+                return cats.Count;
+            }
         }
         private void Cat_HungryStatusChanged(object sender, EventArgs e)
         {
@@ -30,14 +40,34 @@ namespace ConsoleApp6
                     FoodResourse -= needFood;
                 else
                 {
-                    needFood = (byte)FoodResourse;
+                    needFood = (byte)FoodResourse; 
                     FoodResourse = 0;
                 }
                 cat.Feed(needFood);
-                Console.WriteLine($"Покормлена кошка: {cat.Name}\nОстаток еды в вольере: {FoodResourse}");
+
+                PrintStatus();
             }
         }
-    }
-}
+        public void PrintStatus()
+        {
 
+            int leftPosition = Console.CursorLeft;
+            int topPosition = Console.CursorTop;
+
+            for (int i = 0; i < cats.Count; i++)
+            {
+                string message = cats[i].GetStatus("");
+                int color = Convert.ToInt32(message.Substring(0, 1));
+                Console.SetCursorPosition(0, i);
+                Console.ForegroundColor = (ConsoleColor)color;
+                Console.Write(message.Substring(2).Trim().PadRight(50));
+                Console.ResetColor();
+            }
+            Console.SetCursorPosition(0, CatsCount);
+            Console.Write($"Еды в вольере: + {FoodResourse}".PadRight(50));
+            Console.SetCursorPosition(leftPosition, topPosition);
+        }
+
+    } 
+}
 
