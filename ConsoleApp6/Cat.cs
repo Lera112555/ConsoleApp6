@@ -71,9 +71,7 @@ namespace ConsoleApp6
         {
             string name = Name;
             string age = Convert.ToString(GetAge());
-            string status = Convert.ToString(HungryStatys); 
-            Console.WriteLine(Name);
-            Console.WriteLine($"Возраст: {GetAge()}");
+            string status = Convert.ToString(HungryStatys);
             if (HungryStatus < 10)
             {
                 color = Convert.ToString(Convert.ToInt32(Console.ForegroundColor = ConsoleColor.DarkRed)); 
@@ -94,7 +92,7 @@ namespace ConsoleApp6
             {
                 color = Convert.ToString(Convert.ToInt32(Console.ForegroundColor = ConsoleColor.Green ));
             }
-            string getStatus = $"(color), (name), (age), (status)";
+            string getStatus = $"{color}, {name}, {age}, {status}";
             return getStatus; 
         }
 

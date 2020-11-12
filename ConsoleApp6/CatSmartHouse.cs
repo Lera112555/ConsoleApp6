@@ -30,6 +30,7 @@ namespace ConsoleApp6
                 return cats.Count;
             }
         }
+        
         private void Cat_HungryStatusChanged(object sender, EventArgs e)
         {
             var cat = (Cat)sender;
