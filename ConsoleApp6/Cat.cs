@@ -104,6 +104,13 @@ namespace ConsoleApp6
             await LifeCircle();
 
         }
-        
+
+        public int Property
+        {
+            get => default;
+            set
+            {
+            }
+        }
     } 
 }

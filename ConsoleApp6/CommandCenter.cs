@@ -69,5 +69,10 @@ namespace ConsoleApp6
                 }
             }
         }
+
+        public void Method()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

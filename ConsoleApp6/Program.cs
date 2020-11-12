@@ -9,6 +9,14 @@ namespace ConsoleApp6
 {
     class Program
     {
+        public int Property
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         static void Main(string[] args)
         {
             Cat c = new Cat("Kit", new DateTime(2005, 8, 7));
@@ -25,6 +33,11 @@ namespace ConsoleApp6
             catSmartH.AddCat(c);
             catSmartH.AddCat(ct);
             Console.ReadLine();
+        }
+
+        public void Method()
+        {
+            throw new System.NotImplementedException();
         }
     }
 

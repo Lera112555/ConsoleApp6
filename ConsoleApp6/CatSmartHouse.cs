@@ -69,6 +69,10 @@ namespace ConsoleApp6
             Console.SetCursorPosition(leftPosition, topPosition);
         }
 
+        public void Method()
+        {
+            throw new System.NotImplementedException();
+        }
     } 
 }
 
