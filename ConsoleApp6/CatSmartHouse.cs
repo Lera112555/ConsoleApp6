@@ -10,7 +10,6 @@ namespace ConsoleApp6
     {
         static object printing = true;
 
-
         List<Cat> cats = new List<Cat>();
         public CatSmartHouse(int foodResourse)
         {
@@ -59,7 +58,7 @@ namespace ConsoleApp6
                 int leftPosition = Console.CursorLeft;
                 int topPosition = Console.CursorTop;
 
-                for (int i = 0; i < cats.Count; i++)
+                for (var i = 0; i < cats.Count; i++)
                 {
                     string message = cats[i].GetStatus("");
                     int color = Convert.ToInt32(message.Substring(0, 1));
