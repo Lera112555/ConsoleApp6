@@ -8,9 +8,10 @@ namespace ConsoleApp6
 {
     class CatSmartHouse
     {
+        static object printing = true;
 
-        
-            List<Cat> cats = new List<Cat>();
+
+        List<Cat> cats = new List<Cat>();
         public CatSmartHouse(int foodResourse)
         {
             FoodResourse = foodResourse;
@@ -30,7 +31,7 @@ namespace ConsoleApp6
                 return cats.Count;
             }
         }
-        
+
         private void Cat_HungryStatusChanged(object sender, EventArgs e)
         {
             var cat = (Cat)sender;
@@ -41,7 +42,7 @@ namespace ConsoleApp6
                     FoodResourse -= needFood;
                 else
                 {
-                    needFood = (byte)FoodResourse; 
+                    needFood = (byte)FoodResourse;
                     FoodResourse = 0;
                 }
                 cat.Feed(needFood);
@@ -50,29 +51,32 @@ namespace ConsoleApp6
             }
         }
         public void PrintStatus()
+
         {
-
-            int leftPosition = Console.CursorLeft;
-            int topPosition = Console.CursorTop;
-
-            for (int i = 0; i < cats.Count; i++)
+            lock (printing)
             {
-                string message = cats[i].GetStatus("");
-                int color = Convert.ToInt32(message.Substring(0, 1));
-                Console.SetCursorPosition(0, i);
-                Console.ForegroundColor = (ConsoleColor)color;
-                Console.Write(message.Substring(2).Trim().PadRight(50));
-                Console.ResetColor();
+
+                int leftPosition = Console.CursorLeft;
+                int topPosition = Console.CursorTop;
+
+                for (int i = 0; i < cats.Count; i++)
+                {
+                    string message = cats[i].GetStatus("");
+                    int color = Convert.ToInt32(message.Substring(0, 1));
+                    Console.SetCursorPosition(0, i);
+                    Console.ForegroundColor = (ConsoleColor)color;
+                    Console.Write(message.Substring(2).Trim().PadRight(50));
+                    Console.ResetColor();
+                }
+                Console.SetCursorPosition(0, CatsCount);
+                Console.Write($"Еды в вольере: + {FoodResourse}".PadRight(50, ' '));
+                Console.SetCursorPosition(leftPosition, topPosition);
             }
-            Console.SetCursorPosition(0, CatsCount);
-            Console.Write($"Еды в вольере: + {FoodResourse}".PadRight(50));
-            Console.SetCursorPosition(leftPosition, topPosition);
         }
 
-        public void Method()
+        private static void Method()
         {
             throw new System.NotImplementedException();
         }
-    } 
-}
+    } }
 
